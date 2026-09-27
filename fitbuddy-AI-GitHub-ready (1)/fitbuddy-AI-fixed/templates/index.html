@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitBuddy AI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="page-home">
+  <h1>FitBuddy AI</h1>
+  <p>Enter your details to get a personalized 7-day fitness plan.</p>
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  <form action="/generate-workout" method="post">
+    <label for="username">Name
+      <input type="text" id="username" name="username" value="{{ form_data.username if form_data else '' }}" required>
+    </label>
+
+    <label for="user_id">User ID
+      <input type="text" id="user_id" name="user_id" value="{{ form_data.user_id if form_data else '' }}" required>
+    </label>
+
+    <label for="age">Age
+      <input type="number" id="age" name="age" value="{{ form_data.age if form_data else '' }}" required>
+    </label>
+
+    <label for="weight">Weight (kg)
+      <input type="number" step="0.1" id="weight" name="weight" value="{{ form_data.weight if form_data else '' }}" required>
+    </label>
+
+    <label for="goal">Fitness Goal
+      <input type="text" id="goal" name="goal" placeholder="e.g. weight loss, muscle gain" value="{{ form_data.goal if form_data else '' }}" required>
+    </label>
+
+    <label for="intensity">Intensity
+      <select id="intensity" name="intensity" required>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </label>
+
+    <button type="submit">Generate My Plan</button>
+  </form>
+
+  <hr style="margin-top:40px;">
+  <h3>Already have a plan?</h3>
+  <form action="/submit-feedback" method="post">
+    <label for="fb_user_id">User ID
+      <input type="text" id="fb_user_id" name="user_id" required>
+    </label>
+
+    <label for="feedback">Feedback
+      <input type="text" id="feedback" name="feedback" placeholder="e.g. too hard, need more rest days" required>
+    </label>
+
+    <button type="submit">Update My Plan</button>
+  </form>
+</body>
+</html>

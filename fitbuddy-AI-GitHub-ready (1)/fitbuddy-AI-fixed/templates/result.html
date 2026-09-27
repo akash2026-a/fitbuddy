@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your FitBuddy Plan</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="page-result">
+  <h1>Hi {{ user.username }}, here is your plan</h1>
+
+  {% if message %}
+    <div class="message">{{ message }}</div>
+  {% endif %}
+
+  <h2>Workout Plan</h2>
+  <pre>{{ current_plan }}</pre>
+
+  <h2>Nutrition &amp; Recovery Tip</h2>
+  <pre>{{ plan.nutrition_tip }}</pre>
+
+  <h3>Want to adjust this plan?</h3>
+  <form action="/submit-feedback" method="post">
+    <input type="hidden" name="user_id" value="{{ user.user_id }}">
+    <label for="feedback">How should we adjust your plan?
+      <input type="text" id="feedback" name="feedback" placeholder="e.g. too hard, need more rest days" required>
+    </label>
+    <button type="submit">Update Plan <span aria-hidden="true">↗</span></button>
+  </form>
+
+  <p><a href="/">&larr; Back to home</a></p>
+</body>
+</html>

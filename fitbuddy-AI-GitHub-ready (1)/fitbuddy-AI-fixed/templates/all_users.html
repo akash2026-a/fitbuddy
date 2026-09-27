@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Users - FitBuddy Admin</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="page-users">
+  <h1>All Users</h1>
+  <table>
+    <tr>
+      <th>User ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Weight</th>
+      <th>Goal</th>
+      <th>Intensity</th>
+      <th>Created</th>
+      <th></th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.user_id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.age }}</td>
+      <td>{{ user.weight }}</td>
+      <td>{{ user.goal }}</td>
+      <td>{{ user.intensity }}</td>
+      <td>{{ user.created_at }}</td>
+      <td>
+        <form action="/admin/delete/{{ user.user_id }}" method="post">
+          <input type="hidden" name="token" value="{{ token }}">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
